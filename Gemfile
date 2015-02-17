@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'pg', '0.15.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
+#Guard
 group :development, :test do
 	gem 'rspec-rails'
 end
@@ -49,3 +49,5 @@ group :test do
 	gem 'selenium-webdriver','2.35.1'
 	gem 'capybara'
 end
+
+gem 'pg'
