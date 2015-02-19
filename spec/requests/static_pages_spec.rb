@@ -3,34 +3,64 @@ include ApplicationHelper
 
 describe "Static pages" do
 
-subject { page }
+ subject { page }
+ shared_examples_for "all static pages" do
+	it {is_expected.to have_content(heading)}
+    it {is_expected.to have_title(full_title(page_title)) }	
+ end
 
-	
   describe "Home page" do
   	before { visit root_path }
-
-	it {is_expected.to have_content('Simple App')}
-    it {is_expected.to have_title(full_title('')) }
+	let(:heading){'Simple App'}
+	let(:page_title){''}
+	
+	it_should_behave_like "all static pages"
     it {is_expected.not_to have_title('| Home') }
   end
   
   describe "Help page" do
   	before { visit help_path }
   	
-  	it { is_expected.to have_content('Help') }
-  	it { is_expected.to have_title(full_title('Help')) }
+	let(:heading){'Help'}
+	let(:page_title){'Help'}
+	
+	it_should_behave_like "all static pages"
+
   end
   
   describe "About page" do
   	before { visit about_path }
 
-  	it { is_expected.to have_content('About Us') }
-  	it { is_expected.to have_title(full_title('About Us')) }
+	let(:heading){'About Us'}
+	let(:page_title){'About Us'}
+	
+	it_should_behave_like "all static pages"
   end
   
   describe "Contact page" do
   	before { visit contact_path }
-  	it { is_expected.to have_content('Contact') }
-  	it { is_expected.to have_title(full_title('Contact')) }
+	let(:heading){'Contact'}
+	let(:page_title){'Contact'}
+	
+	it_should_behave_like "all static pages"
+  end
+  
+  it "should have the links on the layout" do
+  	visit root_path
+  	click_link "About"
+  	expect(page).to have_title(full_title('About Us'))
+  	
+  	click_link "Help"
+  	expect(page).to have_title(full_title('Help'))
+  	
+  	click_link "Contact"
+  	expect(page).to have_title(full_title('Contact'))
+  	
+  	click_link "Home"
+  	click_link "Sign up now!"
+  	expect(page).to have_title(full_title('Sign up'))
+  	
+  	click_link "simple app"
+  	expect(page).to have_title(full_title(''))
   end
 end
