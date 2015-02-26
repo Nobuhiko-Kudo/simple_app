@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe User do
  before do
+ 	User.destroy_all
  	@user = User.new(name: "Example User", email: "user@example.com", 
  						password: "foobar", password_confirmation: "foobar")
- end
+ 	end
  
  subject{ @user }
  
@@ -13,7 +14,9 @@ describe User do
  it { is_expected.to respond_to(:password_digest) }
  it { is_expected.to respond_to(:password) }
  it { is_expected.to respond_to(:password_confirmation) }
+ it { is_expected.to respond_to(:remember_token) }
  it { is_expected.to respond_to(:authenticate) }
+
  
  it { is_expected.to be_valid }
  
@@ -86,7 +89,10 @@ describe User do
  end
  
  describe "return value of authenticate method" do
- 	before { @user.save }
+ 	before do
+ 		User.destroy_all
+ 		@user.save
+ 	end
  	let(:found_user) { User.find_by(email: @user.email)}
  	
  	describe "with valid password" do
@@ -109,5 +115,17 @@ describe User do
  		@user.save
  		expect(@user.reload.email).to eq mixed_case_email.downcase
  	end
+ end
+ 
+ describe "remember token" do
+ 	before do
+ 		User.destroy_all
+ 		@user.save
+ 	end
+
+	describe '#remember_token' do
+	  subject { super().remember_token }
+	  it { is_expected.not_to be_blank }
+	end
  end
 end
