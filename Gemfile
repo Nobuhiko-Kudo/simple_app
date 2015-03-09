@@ -6,6 +6,11 @@ gem 'rails', '4.1.8'
 gem 'bootstrap-sass','2.3.2.0'
 gem 'sprockets','2.11.0'
 gem 'bcrypt-ruby'
+# 任意のユーザーを複数作成するために必要
+gem 'faker'
+# pageinationのために必要
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 
 

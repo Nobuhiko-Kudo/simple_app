@@ -39,4 +39,5 @@ Rails.application.configure do
   
   #bcryptのコスト関数を下げることでテストの速度を向上させる。
   ActiveModel::SecurePassword.min_cost = true
+  # spec/support/factory_girl.rb
 end
