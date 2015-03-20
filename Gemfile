@@ -64,6 +64,7 @@ group :test do
 	gem 'factory_girl_rails'
 	gem 'cucumber-rails','1.4.0', :require => false
 	gem 'database_cleaner', github: 'bmabey/database_cleaner'
+	gem 'rspec-its'
 end
 
 # Use postgreSQL as the database for Active Record

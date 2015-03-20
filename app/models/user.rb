@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+	has_many :microposts, dependent: :destroy
 	#before_saveの書き換え
 	#before_save { self.email = email.downcase }
 	before_save { email.downcase! }
@@ -26,7 +27,13 @@ class User < ActiveRecord::Base
 	def User.encrypt(token)
 		Digest::SHA1.hexdigest(token.to_s)
 	end
-	
+
+  def feed
+    #このコードは準備段階です。
+    #完全な実装は第11章「ユーザをフォローする」を参照してください。
+    Micropost.where("user_id = ?",id)
+  end
+
 	private
 	
 		def create_remember_token
