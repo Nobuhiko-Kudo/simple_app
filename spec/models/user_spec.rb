@@ -19,7 +19,7 @@ describe User do
  it { is_expected.to respond_to(:admin) }
  it { is_expected.to respond_to(:microposts) }
  it { is_expected.to respond_to(:feed) }
- 
+ it { is_expected.to respond_to(:relationships) } 
  it { is_expected.to be_valid }
  
  describe "with admin attributes set to 'true'" do

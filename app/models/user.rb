@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
 	has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id",dependent: :destroy
 	#before_saveの書き換え
 	#before_save { self.email = email.downcase }
 	before_save { email.downcase! }
